@@ -35,7 +35,6 @@ public class SignUpForm extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("SignUpForm doPost 메서드 실행");
-		System.out.println("SignUpForm doPost 메서드 실행");
 		request.setCharacterEncoding("euc-kr");
 		int st_no = Integer.parseInt(request.getParameter("st_no"));
 		System.out.println("st_no : "+ st_no);
