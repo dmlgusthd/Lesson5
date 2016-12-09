@@ -3,8 +3,8 @@ package service;
 public class StaffDTO {
 	private int st_no;
 	private String st_name;
-	private int st_sn;
-	private int st_graduateday;
+	private String st_sn;
+	private String st_graduateday;
 	private int st_schoolno;
 	private int st_religionno;
 	
@@ -20,16 +20,16 @@ public class StaffDTO {
 	public void setSt_name(String st_name) {
 		this.st_name = st_name;
 	}
-	public int getSt_sn() {
+	public String getSt_sn() {
 		return st_sn;
 	}
-	public void setSt_sn(int st_sn) {
+	public void setSt_sn(String st_sn) {
 		this.st_sn = st_sn;
 	}
-	public int getSt_graduateday() {
+	public String getSt_graduateday() {
 		return st_graduateday;
 	}
-	public void setSt_graduateday(int st_graduateday) {
+	public void setSt_graduateday(String st_graduateday) {
 		this.st_graduateday = st_graduateday;
 	}
 	public int getSt_schoolno() {

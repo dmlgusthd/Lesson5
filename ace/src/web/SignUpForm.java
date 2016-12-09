@@ -14,6 +14,7 @@ import service.SchoolDTO;
 import service.SkillDTO;
 import service.StaffDAO;
 import service.StaffDTO;
+import service.StaffSkillDTO;
 
 
 @WebServlet("/sign/SignUp")
@@ -22,7 +23,6 @@ public class SignUpForm extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("StaffDAO doGet 메서드 실행");
 		staffdao = new StaffDAO();
-		
 		
 		List<ReligionDTO> relist = staffdao.selectReligion();
 		List<SchoolDTO> sclist = staffdao.selectSchool();
@@ -36,31 +36,34 @@ public class SignUpForm extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("SignUpForm doPost 메서드 실행");
 		request.setCharacterEncoding("euc-kr");
-		int st_no = Integer.parseInt(request.getParameter("st_no"));
-		System.out.println("st_no : "+ st_no);
 		String st_name = request.getParameter("st_name");
 		System.out.println("st_name : "+ st_name);
-		int st_sn = Integer.parseInt(request.getParameter("st_sn"));
+		String st_sn = request.getParameter("st_sn1")+"-"+request.getParameter("st_sn2");
 		System.out.println("st_sn : "+ st_sn);
-		int st_graduateday = Integer.parseInt(request.getParameter("st_graduateday"));
+		String st_graduateday = request.getParameter("st_graduateday");
 		System.out.println("st_graduateday : "+ st_graduateday);
 		int schoolno = Integer.parseInt(request.getParameter("schoolno"));
 		System.out.println("schoolno : "+ schoolno);
 		int religionno = Integer.parseInt(request.getParameter("religionno"));
 		System.out.println("religionno : "+ religionno);
+		int skillno = Integer.parseInt(request.getParameter("skillno"));
+		System.out.println("skillno : "+ skillno);
 		
 		StaffDTO staffdto = new StaffDTO();
-		staffdto.setSt_no(st_no);
 		staffdto.setSt_name(st_name);
 		staffdto.setSt_sn(st_sn);
 		staffdto.setSt_graduateday(st_graduateday);
 		staffdto.setSt_schoolno(schoolno);
 		staffdto.setSt_religionno(religionno);
-				
+						
 		staffdao = new StaffDAO();
 		int rowCount = staffdao.insertStaff(staffdto);
+
+		StaffSkillDTO ssdto = new StaffSkillDTO();
+		ssdto.setSkillno(skillno);
+		int rowCount1 = staffdao.staffskill(ssdto);
 		 
-		response.sendRedirect(request.getContextPath()+"/Check/index.jsp");
+		response.sendRedirect(request.getContextPath()+"/index.jsp");
 	
 	}
 

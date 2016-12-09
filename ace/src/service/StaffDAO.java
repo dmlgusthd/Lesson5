@@ -12,6 +12,7 @@ import java.util.List;
 import javax.servlet.http.HttpServlet;
 
 
+@SuppressWarnings("serial")
 public class StaffDAO extends HttpServlet {
 	private final String driverClassName = "com.mysql.jdbc.Driver";
     private final String url = "jdbc:mysql://127.0.0.1:3306/ace?useUnicode=true&characterEncoding=euckr";
@@ -21,8 +22,33 @@ public class StaffDAO extends HttpServlet {
     PreparedStatement statement = null;
     StaffDTO staffdto = new StaffDTO();
     
+    
+public int staffskill(StaffSkillDTO ssdto){
+	System.out.println("StaffSkill 메서드 실행");
+	  int rowCount1 = 0;
+	    String sql = "INSERT INTO staffskill(ss_no, staffno, skillno) VALUES(?,?,?)";
+	    try {
+	        connection = this.getConnection();
+	        statement = connection.prepareStatement(sql);
+	        statement.setInt(1,ssdto.getSs_no());
+	        System.out.println("ss_no값 "+statement);
+	        statement.setInt(2,ssdto.getStaffno());
+	        System.out.println("staffno값 "+statement);
+	        statement.setInt(3,ssdto.getSkillno());
+	        System.out.println("skillno값 "+statement);
+	        rowCount1 = statement.executeUpdate();
+	        System.out.println("staffskill메서드 인서트 쿼리실행");
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    } finally {
+	        this.close(connection, statement, null);
+	    }
+	    return rowCount1;
+}
+
+
 public int insertStaff(StaffDTO stdto) {
-	System.out.println("insertStaff DAO");
+	System.out.println("insertStaff 메서드 실행");
     int rowCount = 0;
     String sql = "INSERT INTO staff(st_no, st_name, st_sn, st_graduateday, schoolno, religionno) values(?,?,?,?,?,?)";
     try {
@@ -30,8 +56,8 @@ public int insertStaff(StaffDTO stdto) {
         statement = connection.prepareStatement(sql);
         statement.setInt(1,stdto.getSt_no());
         statement.setString(2,stdto.getSt_name());
-        statement.setInt(3,stdto.getSt_sn());
-        statement.setInt(4,stdto.getSt_graduateday());
+        statement.setString(3,stdto.getSt_sn());
+        statement.setString(4,stdto.getSt_graduateday());
         statement.setInt(5,stdto.getSt_schoolno());
         statement.setInt(6,stdto.getSt_religionno());
         rowCount = statement.executeUpdate();
@@ -57,7 +83,7 @@ public ArrayList<SchoolDTO> selectSchool(){
         System.out.println("stmt is " + statement);
         
         resultset = statement.executeQuery();
-        System.out.println("쿼리실행 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        System.out.println("selectSchool 쿼리실행 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
         while(resultset.next()) {
         	SchoolDTO scdto = new SchoolDTO();
         	scdto.setSc_no(resultset.getInt("sc_no"));
@@ -86,7 +112,7 @@ public ArrayList<ReligionDTO> selectReligion(){
         System.out.println("stmt is " + statement);
         
         resultset = statement.executeQuery();
-        System.out.println("쿼리실행 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        System.out.println("selectReligion 쿼리실행 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
         while(resultset.next()) {
         	ReligionDTO redto = new ReligionDTO();
         	System.out.println("1111111111");
@@ -116,7 +142,7 @@ public ArrayList<SkillDTO> selectSkill() {
         System.out.println("stmt is " + statement);
         
         resultset = statement.executeQuery();
-        System.out.println("쿼리실행 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        System.out.println("selectSkill 쿼리실행 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
         while(resultset.next()) {
         	SkillDTO skdto = new SkillDTO();
         	System.out.println("1111111111");
