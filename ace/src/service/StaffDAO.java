@@ -12,7 +12,7 @@ import java.util.List;
 import javax.servlet.http.HttpServlet;
 
 
-@SuppressWarnings("serial")
+@SuppressWarnings({ "serial", "unused" })
 public class StaffDAO extends HttpServlet {
 	private final String driverClassName = "com.mysql.jdbc.Driver";
     private final String url = "jdbc:mysql://127.0.0.1:3306/ace?useUnicode=true&characterEncoding=euckr";

@@ -17,6 +17,7 @@ import service.StaffDTO;
 import service.StaffSkillDTO;
 
 
+@SuppressWarnings("serial")
 @WebServlet("/sign/SignUp")
 public class SignUpForm extends HttpServlet {
     private StaffDAO staffdao;
