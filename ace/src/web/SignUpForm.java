@@ -23,6 +23,7 @@ public class SignUpForm extends HttpServlet {
     private StaffDAO staffdao;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("StaffDAO doGet 메서드 실행");
+		System.out.println("StaffDAO doGet 메서드 실행");
 		staffdao = new StaffDAO();
 		
 		List<ReligionDTO> relist = staffdao.selectReligion();
